@@ -1,0 +1,379 @@
+:root {
+    --background: #f3f3f3;
+    --card-background: rgba(255, 255, 255, 0.8);
+    --text-primary: #000000;
+    --accent-color: #0078d4;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Segoe UI", sans-serif;
+    background: var(--background);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container {
+    width: 100%;
+    max-width: 600px;
+    padding: 20px;
+}
+
+.card {
+    background: var(--card-background);
+    backdrop-filter: blur(10px);
+    border-radius: 8px;
+    padding: 24px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card h1 {
+    margin: 0 0 16px 0;
+    font-size: 24px;
+    color: var(--text-primary);
+}
+
+.input-group {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+input {
+    flex: 1;
+    padding: 12px;
+    border: 2px solid #e0e0e0;
+    border-radius: 4px;
+    font-size: 16px;
+    transition: border-color 0.2s;
+}
+
+input:focus {
+    border-color: var(--accent-color);
+    outline: none;
+}
+
+button {
+    padding: 12px 24px;
+    background: var(--accent-color);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+button:hover {
+    background: #006cbd;
+}
+
+.result-container {
+    margin-top: 20px;
+}
+
+.user-data {
+    display: flex;
+    gap: 20px;
+    align-items: start;
+    position: relative;
+}
+
+.avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.online-status {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 2px solid white;
+    background: #ccc;
+}
+
+.online-status.online {
+    background: #44b700;
+}
+
+.hidden {
+    display: none;
+}
+
+.skeleton {
+    padding: 20px;
+}
+
+.skeleton-header {
+    height: 32px;
+    background: #e0e0e0;
+    border-radius: 4px;
+    margin-bottom: 15px;
+}
+
+.skeleton-line {
+    height: 16px;
+    background: #e0e0e0;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    width: 80%;
+}
+
+.user-info {
+    flex: 1;
+}
+
+.user-info h2 {
+    margin: 0 0 8px 0;
+    font-size: 24px;
+}
+
+.user-details {
+    white-space: pre-line;
+    line-height: 1.5;
+}
+
+.detail-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 6px;
+    padding: 8px;
+    background: rgba(0, 0, 0, 0.02);
+    border-radius: 6px;
+    transition: background-color 0.2s;
+}
+
+.detail-row:hover {
+    background: rgba(0, 0, 0, 0.04);
+}
+
+.detail-row.full-width .detail-value {
+    padding: 8px;
+    margin-top: 4px;
+    background: rgba(0, 0, 0, 0.02);
+    border-radius: 4px;
+    width: 100%;
+    box-sizing: border-box;
+    white-space: pre-wrap;
+}
+
+.detail-row.full-width {
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.detail-row.full-width .detail-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 4px;
+}
+
+.detail-icon {
+    width: 20px;
+    text-align: center;
+}
+
+.detail-label {
+    color: #666;
+    min-width: 100px;
+}
+
+detail-value {
+    flex: 1;
+    line-height: 1.4;
+    word-break: break-word;
+}
+
+.detail-row a {
+    color: var(--accent-color);
+    text-decoration: none;
+}
+
+.detail-row a:hover {
+    text-decoration: underline;
+}
+
+.detail-value a {
+    word-break: break-all;
+}
+
+.user-nickname {
+    color: var(--accent-color);
+    font-size: 14px;
+    margin-bottom: 12px;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.user-nickname:hover {
+    text-decoration: underline;
+}
+
+.detail-section {
+    margin-bottom: 24px;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 8px;
+    padding: 16px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.section-title {
+    margin: 0 0 12px 0;
+    font-size: 18px;
+    color: var(--accent-color);
+    font-weight: 500;
+}
+
+.posts-section {
+    margin-top: 24px;
+}
+
+.post-preview {
+    display: block;
+    padding: 12px;
+    margin-bottom: 8px;
+    background: rgba(0, 0, 0, 0.02);
+    border-radius: 6px;
+    text-decoration: none;
+    color: inherit;
+    transition: background-color 0.2s;
+}
+
+post-preview:hover {
+    background: rgba(0, 0, 0, 0.04);
+}
+
+.post-text {
+    margin-bottom: 8px;
+    line-height: 1.4;
+}
+
+.post-info {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    color: #666;
+    font-size: 0.9em;
+    padding-top: 8px;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.post-info-item {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.post-attachments {
+    display: flex;
+    gap: 8px;
+    margin: 8px 0;
+    color: #666;
+    font-size: 0.9em;
+}
+
+.post-attachment {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 8px;
+    background: rgba(0, 0, 0, 0.03);
+    border-radius: 4px;
+}
+
+.post-repost {
+    color: #0078d4;
+    font-style: italic;
+    margin-bottom: 8px;
+    font-size: 0.9em;
+}
+
+.open-vk-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 12px;
+    background: var(--accent-color);
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background 0.2s;
+    font-size: 14px;
+    width: 100%;
+    box-sizing: border-box;
+    height: 32px;
+}
+
+.button-content {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    white-space: nowrap;
+}
+
+.button-content svg {
+    width: 14px;
+    height: 14px;
+    margin: 0 2px;
+}
+
+.open-vk-button:hover {
+    background: #006cbd;
+}
+
+.open-vk-button svg {
+    width: 14px;
+    height: 14px;
+    margin-right: 2px;
+}
+
+.open-vk-button strong {
+    font-weight: 600;
+}
+
+.footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    margin-top: 24px;
+    opacity: 0.4;
+    transition: opacity 0.2s;
+}
+
+.footer:hover {
+    opacity: 1;
+}
+
+.love {
+    color: var(--text-primary);
+    font-size: 14px;
+}
+
+.github-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--text-primary);
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.github-link:hover {
+    color: var(--accent-color);
+}
+
+.github-link svg {
+    width: 16px;
+    height: 16px;
+}
