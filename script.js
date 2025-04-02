@@ -13,7 +13,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // Конфигурация API
     const API_TOKEN = '18343-01ca04d6-a6170c58-1dc48515-919bdfdd-e8d7f1a5-c9dcffb3-3ae898e3-bc2d4731-d5b208d8-jill';
     const API_VERSION = '5.131';
-    const CORS_PROXY = 'https://api.allorigins.win/raw?url='; // Меняем прокси (вообще был сервер-файл, но у меня свободных VDS нет)
+    // Обновляем на более стабильный CORS-прокси
+    const CORS_PROXY = 'https://proxy.cors.sh/';
     const API_BASE_URL = 'https://ovk.to/method';
 
     // Функция для выполнения запросов к API
@@ -31,11 +32,12 @@ document.addEventListener('DOMContentLoaded', () => {
         );
 
         try {
-            const proxyUrl = CORS_PROXY + encodeURIComponent(apiUrl.toString());
+            const proxyUrl = CORS_PROXY + apiUrl.toString();
             const response = await fetch(proxyUrl, {
-                method: 'GET', // Меняем на GET
+                method: 'GET',
                 headers: {
-                    'Accept': 'application/json'
+                    'Accept': 'application/json',
+                    'x-cors-api-key': 'temp_f534228c740dfb260194d1c151074b91', // Добавляем ключ для cors.sh
                 }
             });
             
@@ -44,7 +46,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             
             const data = await response.json();
-            console.log(`${method} response:`, data);
             
             if (data.error) {
                 throw new Error(data.error.error_msg || 'API Error');
