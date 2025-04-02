@@ -10,12 +10,41 @@ document.addEventListener('DOMContentLoaded', () => {
     // Добавляем дефолтную аватарку как base64
     const DEFAULT_AVATAR = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiB2aWV3Qm94PSIwIDAgMTAwIDEwMCI+PHJlY3Qgd2lkdGg9IjEwMCIgaGVpZ2h0PSIxMDAiIGZpbGw9IiNFMEUwRTAiLz48Y2lyY2xlIGN4PSI1MCIgY3k9IjM1IiByPSIyMCIgZmlsbD0iI0JEQkRCRCIvPjxwYXRoIGQ9Ik0yMCA4MEMyMCA2MCAzMCA1MCA1MCA1MEM3MCA1MCA4MCA2MCA4MCA4MEw4MCA5MEwyMCA5MEwyMCA4MFoiIGZpbGw9IiNCREJEQkQiLz48L3N2Zz4=';
 
-    // Конфигурация API
+    // Конфигурация API с несколькими резервными прокси
     const API_TOKEN = '18343-01ca04d6-a6170c58-1dc48515-919bdfdd-e8d7f1a5-c9dcffb3-3ae898e3-bc2d4731-d5b208d8-jill';
     const API_VERSION = '5.131';
-    // Обновляем на более стабильный CORS-прокси
-    const CORS_PROXY = 'https://proxy.cors.sh/';
     const API_BASE_URL = 'https://ovk.to/method';
+
+    // Список доступных прокси
+    const PROXY_URLS = [
+        'https://api.codetabs.com/v1/proxy?quest=',
+        'https://api.allorigins.win/raw?url=',
+        'https://crossorigin.me/',
+        'https://thingproxy.freeboard.io/fetch/',
+        'https://yacdn.org/proxy/'
+    ];
+
+    // Функция для попытки использования разных прокси
+    async function tryProxies(url) {
+        for (const proxy of PROXY_URLS) {
+            try {
+                const response = await fetch(proxy + encodeURIComponent(url), {
+                    method: 'GET',
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+                
+                if (response.ok) {
+                    return await response.json();
+                }
+            } catch (error) {
+                console.warn(`Proxy ${proxy} failed:`, error);
+                continue; // Пробуем следующий прокси
+            }
+        }
+        throw new Error('Все прокси недоступны');
+    }
 
     // Функция для выполнения запросов к API
     async function makeApiRequest(method, params) {
@@ -32,20 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
         );
 
         try {
-            const proxyUrl = CORS_PROXY + apiUrl.toString();
-            const response = await fetch(proxyUrl, {
-                method: 'GET',
-                headers: {
-                    'Accept': 'application/json',
-                    'x-cors-api-key': 'temp_f534228c740dfb260194d1c151074b91', // Добавляем ключ для cors.sh
-                }
-            });
-            
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-            
-            const data = await response.json();
+            const data = await tryProxies(apiUrl.toString());
             
             if (data.error) {
                 throw new Error(data.error.error_msg || 'API Error');
