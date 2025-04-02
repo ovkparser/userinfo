@@ -31,8 +31,8 @@
 
 1. Клонируйте репозиторий:
 ```bash
-git clone https://github.com/ovkparser/ovkparser.github.io.git
-cd ovkparser.github.io
+git clone https://github.com/ovkparser/userinfo.git
+cd userinfo
 ```
 
 2. Откройте `index.html` в браузере
